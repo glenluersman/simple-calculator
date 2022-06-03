@@ -1,5 +1,5 @@
 <p align="center">
- <img width=200px height=200px src="./images/logo-round-dark.png" alt="Project logo"></a>
+ <img width=200px height=200px src="./assets/images/logo-round-dark.png" alt="Project logo"></a>
 </p>
 
 <h3 align="center">Simple Calculator</h3>
