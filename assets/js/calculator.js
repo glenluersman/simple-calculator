@@ -25,13 +25,26 @@ keys.addEventListener('click', event => {
     const keyContent = key.textContent;
     const displayedNum = display.textContent;
     const previousKeyType = calculator.dataset.previousKeyType
+    
+    Array.from(key.parentNode.children)
+      .forEach(k => k.classList.remove('is-depressed'));
 
     if (!action) {
-      if (displayedNum === '0' || previousKeyType === 'operator') {
+      if (displayedNum === '0' || previousKeyType === 'operator' || previousKeyType === 'calculate') {
         display.textContent = keyContent;
       } else {
         display.textContent = displayedNum + keyContent;
       }
+      calculator.dataset.previousKeyType = 'number';
+    }
+    
+    if (action === 'decimal') {
+      if (!displayedNum.includes('.')) {
+        display.textContent = displayedNum + '.';
+      } else if (previousKeyType === 'operator' || previousKeyType === 'calculate') {
+        display.textContent = '0.';
+      }
+      calculator.dataset.previousKeyType = 'decimal';
     }
 
     if (
@@ -40,30 +53,60 @@ keys.addEventListener('click', event => {
       action === 'multiply' ||
       action === 'divide' 
     ) {
-      console.log('operator key!');
+      const firstValue = calculator.dataset.firstValue;
+      const operator = calculator.dataset.operator;
+      const secondValue = displayedNum;
+
+      if (firstValue && operator && previousKeyType !== 'operator' && previousKeyType === 'calculate') {
+         const calcValue = calculate(firstValue, operator, secondValue);
+         display.textContent = calcValue;
+         calculator.dataset.firstValue = calcValue;
+      } else {
+        calculator.dataset.firstValue = displayedNum;
+      }
+
       key.classList.add('is-depressed');
       calculator.dataset.previousKeyType = 'operator';
       calculator.dataset.firstValue =displayedNum;
       calculator.dataset.operator = action;
     } 
     
-    if (action === 'decimal') {
-      display.textContent = displayedNum + '.';
-    }
-    
     if (action === 'clear') {
-      display.textContent = '0';
+      if (key.textContent === 'AC') {
+        calculator.dataset.firstValue = '';
+        calculator.dataset.modValue = '';
+        calculator.dataset.operator = '';
+        calculator.dataset.previousKeyType = '';
+      } else {
+        key.textContent = 'AC';
+      }
+      
+      display.textContent = 0;
+      calculator.dataset.previousKeyType = 'clear';
+    }
+
+    if (action !== 'clear') {
+      const clearButton = calculator.querySelector('[data-action=clear]');
+      clearButton.textContent = 'CE';
     }
     
     if (action === 'calculate') {
-      const firstValue = calculator.dataset.firstValue;
+      let firstValue = calculator.dataset.firstValue;
       const operator = calculator.dataset.operator;
-      const secondValue = displayedNum;
+      let secondValue = displayedNum;
+
+      if (firstValue) {
+        if (previousKeyType === 'calculate') {
+          firstValue = displayedNum;
+          secondValue = calculator.dataset.modValue;
+        }
+
+        display.textContent = calculate(firstValue, operator, secondValue);
+      }
       
-      display.textContent = calculate(firstValue, operator, secondValue)
+      calculator.dataset.previousKeyType = 'calculate';
+      calculator.dataset.modValue = secondValue;
+      calculator.dataset.previousKeyType = 'calculate'
     }
-    
-    Array.from(key.parentNode.children)
-      .forEach(key => key.classList.remove('is-depressed'))
   }
 })
