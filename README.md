@@ -26,11 +26,11 @@
 
 ## <img id="about" src="https://github.com/teamjuli0/readme-badges/blob/main/themes/clean-dark/menu-categories/about.png?raw=true" style="height: 40px">
 
-- This app is a simple calculator.
+- This app is a simple calculator and can also be used as a chrome extension.
 
 ## <img id="usage" src="https://github.com/teamjuli0/readme-badges/blob/main/themes/clean-dark/menu-categories/usage.png?raw=true" style="height: 40px">
 
-- Simple calculator is easy to use. simply open the app and use as you would a normal calculator.
+- Simple calculator is easy to use. Simply open the app and use as you would a normal calculator. You can also add it as a chrome extension.
 
 ## <img id="built_using" src="https://github.com/teamjuli0/readme-badges/blob/main/themes/clean-dark/menu-categories/built-using.png?raw=true" style="height: 40px">
 
@@ -48,8 +48,4 @@
 
 ## <img id="screenshots" src="https://github.com/teamjuli0/readme-badges/blob/main/themes/clean-dark/menu-categories/screenshots.png?raw=true" style="height: 40px">
 
-<img style="margin: 0 0 15px 0" src="public/images/.PNG" ></a>
-
-<img style="margin: 0 0 15px 0" src="public/images/.PNG" ></a>
-
-<img style="margin: 0 0 15px 0" src="public/images/.PNG" ></a>
+<img style="margin: 0 0 15px 0" src="assets/images/calculator.PNG" ></a>
